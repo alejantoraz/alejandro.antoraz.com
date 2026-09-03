@@ -1,0 +1,39 @@
+---
+pagination:
+  data: galeria
+  size: 1
+  alias: proyecto
+permalink: "/colecciones/{{ proyecto.nombre | slug }}/"
+layout: base.njk
+title: Alejandro Antoraz
+pagina: proyectos
+---
+
+<div class="cabecera-proyecto">
+  <div class="descripcion-proyecto">
+    {{ proyecto.descripcionHtml | safe }}
+  </div>
+
+  <a href="/" class="volver">&larr; volver a colecciones</a>
+</div>
+
+<div class="fotos-proyecto">
+  {% for imagen in proyecto.imagenes %}
+    {% set indicePrevio = loop.length if loop.first else loop.index - 1 %}
+    {% set indiceSiguiente = 1 if loop.last else loop.index + 1 %}
+    <a href="#foto-{{ loop.index }}" class="foto-link">
+      <img src="{{ proyecto.imagenesMini[loop.index0] or imagen }}" alt="{{ proyecto.titulo or proyecto.nombre }} - foto {{ loop.index }} de {{ proyecto.imagenes.length }}" loading="lazy">
+    </a>
+    <div class="lightbox" id="foto-{{ loop.index }}">
+      <a href="#cerrar" class="lightbox-cerrar">
+        <img src="{{ imagen }}" alt="{{ proyecto.titulo or proyecto.nombre }} - foto {{ loop.index }} de {{ proyecto.imagenes.length }}">
+      </a>
+      {% if loop.length > 1 %}
+        <a href="#foto-{{ indicePrevio }}" class="lightbox-nav lightbox-prev" aria-label="Foto anterior">&lsaquo;</a>
+        <a href="#foto-{{ indiceSiguiente }}" class="lightbox-nav lightbox-next" aria-label="Foto siguiente">&rsaquo;</a>
+      {% endif %}
+    </div>
+  {% endfor %}
+</div>
+
+<a href="/" class="volver">&larr; volver a colecciones</a>

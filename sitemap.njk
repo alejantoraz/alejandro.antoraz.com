@@ -1,0 +1,21 @@
+---
+permalink: /sitemap.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://alejandro.antoraz.com/</loc>
+  </url>
+  <url>
+    <loc>https://alejandro.antoraz.com/cv/</loc>
+  </url>
+  <url>
+    <loc>https://alejandro.antoraz.com/contacto/</loc>
+  </url>
+  {% for proyecto in galeria %}
+  <url>
+    <loc>https://alejandro.antoraz.com/colecciones/{{ proyecto.nombre | slug }}/</loc>
+  </url>
+  {% endfor %}
+</urlset>
