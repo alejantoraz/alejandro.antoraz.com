@@ -3,7 +3,7 @@ pagination:
   data: galeria
   size: 1
   alias: proyecto
-permalink: "/colecciones/{{ proyecto.nombre | slug }}/"
+permalink: "/proyectos/{{ proyecto.nombre | slug }}/"
 layout: base.njk
 title: Alejandro Antoraz
 pagina: proyectos
@@ -14,7 +14,7 @@ pagina: proyectos
     {{ proyecto.descripcionHtml | safe }}
   </div>
 
-  <a href="/" class="volver">&larr; volver a colecciones</a>
+  <a href="/" class="volver">&larr; volver a proyectos</a>
 </div>
 
 <div class="fotos-proyecto">
@@ -36,4 +36,4 @@ pagina: proyectos
   {% endfor %}
 </div>
 
-<a href="/" class="volver">&larr; volver a colecciones</a>
+<a href="/" class="volver">&larr; volver a proyectos</a>

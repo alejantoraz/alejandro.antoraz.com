@@ -28,7 +28,7 @@
     "name": "Alejandro Antoraz Alonso",
     "url": "https://alejandro.antoraz.com",
     "email": "mailto:antoraz@proton.me",
-    "jobTitle": "Fotografo y artista visual",
+    "jobTitle": "Ilustrador y artista visual",
     "sameAs": [
       "https://www.instagram.com/alejantoraz_foto",
       "https://www.behance.net/alejantoraz",
@@ -43,13 +43,13 @@
     "@type": "ImageGallery",
     "name": "{{ proyecto.titulo or proyecto.nombre }}",
     "description": "{{ proyecto.descripcionHtml | striptags | truncate(160) }}",
-    "url": "https://alejandro.antoraz.com/colecciones/{{ proyecto.nombre | slug }}/"
+    "url": "https://alejandro.antoraz.com/proyectos/{{ proyecto.nombre | slug }}/"
   }
   </script>
   {% endif %}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
       --black: #111111;
@@ -59,7 +59,7 @@
     }
     * { box-sizing: border-box; }
     body {
-      font-family: 'IBM Plex Mono', monospace;
+      font-family: 'Sora', sans-serif;
       margin: 0;
       background: var(--bg);
       color: var(--black);
@@ -70,7 +70,11 @@
       border-bottom: 1px solid var(--border);
       position: sticky;
       top: 0;
-      background: var(--bg);
+      background-color: var(--bg);
+      background-image: url("https://s3.eu-central-003.backblazeb2.com/antoraz-ilustracion/cabecera-fondo.jpg");
+      background-repeat: repeat-x;
+      background-position: left center;
+      background-size: auto 100%;
       z-index: 10;
     }
     @media (max-width: 600px) {
@@ -79,10 +83,12 @@
       }
     }
     header h1 {
-      font-size: 1rem;
-      font-weight: 600;
+      font-size: 1.15rem;
+      font-weight: 800;
       letter-spacing: 0.03em;
       margin: 0;
+      color: #fff;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.65);
     }
     header p {
       font-size: 0.85rem;
@@ -90,18 +96,20 @@
       margin: 0.4rem 0 1.2rem;
     }
     nav a {
-      font-size: 0.8rem;
-      color: var(--black);
+      font-size: 0.9rem;
+      color: #fff;
+      font-weight: 700;
       text-decoration: none;
       margin-right: 1.5rem;
       letter-spacing: 0.03em;
       border-bottom: 1px solid transparent;
       padding-bottom: 2px;
       transition: border-color 0.2s ease;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.65);
     }
     nav a:hover,
     nav a.activo {
-      border-color: var(--black);
+      border-color: #fff;
     }
     main {
       padding: 2rem;
@@ -171,6 +179,9 @@
     }
     .descripcion-proyecto p {
       margin-bottom: 1rem;
+      orphans: 3;
+      widows: 3;
+      break-inside: avoid;
     }
     .fotos-proyecto {
       columns: 3 340px;
@@ -258,9 +269,9 @@
 </head>
 <body>
   <header>
-    <h1><a href="/" style="color:inherit; text-decoration:none;">alejandro antoraz alonso</a></h1>
+    <h1><a href="/" style="color:inherit; text-decoration:none;">alejandro antoraz alonso - ilustración</a></h1>
     <nav>
-      <a href="/" class="{% if pagina == 'proyectos' %}activo{% endif %}">colecciones</a>
+      <a href="/" class="{% if pagina == 'proyectos' %}activo{% endif %}">proyectos</a>
       <a href="/cv/" class="{% if pagina == 'cv' %}activo{% endif %}">cv</a>
       <a href="/contacto/" class="{% if pagina == 'contacto' %}activo{% endif %}">contacto</a>
     </nav>
