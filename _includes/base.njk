@@ -42,7 +42,7 @@
     "@type": "ImageGallery",
     "name": "{{ proyecto.titulo or proyecto.nombre }}",
     "description": "{{ proyecto.descripcionHtml | striptags | truncate(160) }}",
-    "url": "https://alejandro.antoraz.com/colecciones/{{ proyecto.nombre | slug }}/"
+    "url": "https://alejandro.antoraz.com/proyectos/{{ proyecto.nombre | slug }}/"
   }
   </script>
   {% endif %}
@@ -69,7 +69,11 @@
       border-bottom: 1px solid var(--border);
       position: sticky;
       top: 0;
-      background: var(--bg);
+      background-color: var(--bg);
+      background-image: url("https://s3.eu-central-003.backblazeb2.com/antoraz-ilustracion/cabecera-fondo.jpg");
+      background-repeat: repeat-x;
+      background-position: left center;
+      background-size: auto 100%;
       z-index: 10;
     }
     @media (max-width: 600px) {
@@ -79,9 +83,10 @@
     }
     header h1 {
       font-size: 1rem;
-      font-weight: 600;
+      font-weight: 700;
       letter-spacing: 0.03em;
       margin: 0;
+      color: #fff;
     }
     header p {
       font-size: 0.85rem;
@@ -90,7 +95,8 @@
     }
     nav a {
       font-size: 0.8rem;
-      color: var(--black);
+      color: #fff;
+      font-weight: 700;
       text-decoration: none;
       margin-right: 1.5rem;
       letter-spacing: 0.03em;
@@ -100,7 +106,7 @@
     }
     nav a:hover,
     nav a.activo {
-      border-color: var(--black);
+      border-color: #fff;
     }
     main {
       padding: 2rem;
@@ -259,7 +265,7 @@
   <header>
     <h1><a href="/" style="color:inherit; text-decoration:none;">alejandro antoraz alonso</a></h1>
     <nav>
-      <a href="/" class="{% if pagina == 'proyectos' %}activo{% endif %}">colecciones</a>
+      <a href="/" class="{% if pagina == 'proyectos' %}activo{% endif %}">proyectos</a>
       <a href="/cv/" class="{% if pagina == 'cv' %}activo{% endif %}">cv</a>
       <a href="/contacto/" class="{% if pagina == 'contacto' %}activo{% endif %}">contacto</a>
     </nav>
