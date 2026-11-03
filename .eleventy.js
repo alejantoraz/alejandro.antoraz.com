@@ -1,4 +1,5 @@
 module.exports = function (eleventyConfig) {
+  eleventyConfig.addPassthroughCopy("flipbook");
   eleventyConfig.addFilter("slug", (str) => {
     return String(str)
       .toLowerCase()

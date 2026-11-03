@@ -1,0 +1,56 @@
+/* Visor de flipbook — usa los colores y la tipografía de cada web */
+.flipbook {
+  --flipbook-ratio: 1.414;
+  margin: 0 0 3rem;
+  outline: none;
+}
+.flipbook-escenario {
+  /* Dos páginas a lo ancho; el alto nunca supera el 80 % de la pantalla */
+  width: min(100%, calc(80vh / var(--flipbook-ratio) * 2));
+  margin: 0 auto;
+  min-height: 200px;
+  position: relative;
+}
+@media (max-width: 640px) {
+  .flipbook-escenario { width: min(100%, calc(75vh / var(--flipbook-ratio))); }
+}
+.flipbook-escenario::before {
+  content: "Cargando…";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: var(--gray, #888);
+  font-size: 0.8rem;
+}
+.flipbook.listo .flipbook-escenario::before { display: none; }
+.flipbook-controles {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  user-select: none;
+}
+.flipbook-controles button {
+  font: inherit;
+  font-size: 1.2rem;
+  line-height: 1;
+  width: 2.4rem;
+  height: 2.4rem;
+  border: 1px solid var(--border, #dcdcdc);
+  border-radius: 50%;
+  background: none;
+  color: var(--black, #111);
+  cursor: pointer;
+}
+.flipbook-controles button:hover:not(:disabled) { border-color: var(--black, #111); }
+.flipbook-controles button:disabled { opacity: 0.3; cursor: default; }
+.flipbook-contador {
+  min-width: 6rem;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--gray, #888);
+  font-variant-numeric: tabular-nums;
+}
+.flipbook-error { text-align: center; color: var(--gray, #888); padding: 3rem 0; }

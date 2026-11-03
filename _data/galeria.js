@@ -48,6 +48,16 @@ module.exports = async function () {
       .filter(key => key.includes('-mini/') && /\.(jpe?g|png|webp|gif)$/i.test(key))
       .map(key => `${process.env.B2_ENDPOINT}/${bucket}/${key}`);
 
+    const numeroPagina = key => {
+      const n = key.split('/').pop().match(/(\d+)\D*$/);
+      return n ? parseInt(n[1], 10) : 0;
+    };
+
+    const paginasFlipbook = claves
+      .filter(key => key.includes('-flipbook/') && /\.(jpe?g|png|webp)$/i.test(key))
+      .sort((a, b) => numeroPagina(a) - numeroPagina(b))
+      .map(key => `${process.env.B2_ENDPOINT}/${bucket}/${key}`);
+
     const claveMd = claves.find(key => key.endsWith(`${nombreProyecto}.md`));
 
     let datos = { titulo: nombreProyecto, año: '', orden: 999, autor_texto: '', portada: '' };
@@ -64,16 +74,17 @@ module.exports = async function () {
       ? `${process.env.B2_ENDPOINT}/${bucket}/${datos.portada}`
       : null;
 
-    if (imagenesGrande.length) {
+    if (imagenesGrande.length || paginasFlipbook.length) {
       proyectos.push({
         nombre: nombreProyecto,
         titulo: datos.titulo,
         año: datos.año,
         autor_texto: datos.autor_texto,
         orden: datos.orden,
-        portada: portadaExplicita || imagenesMini[0] || imagenesGrande[0],
+        portada: portadaExplicita || imagenesMini[0] || imagenesGrande[0] || paginasFlipbook[0],
         imagenes: imagenesGrande,
         imagenesMini,
+        flipbook: paginasFlipbook,
         descripcionHtml,
       });
     }
