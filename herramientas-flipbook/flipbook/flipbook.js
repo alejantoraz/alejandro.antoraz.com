@@ -74,7 +74,17 @@
         sig.disabled = i >= total - 1 || (!vertical && i !== 0 && i + 1 >= total - 1);
       }
 
-      libro.on('init', function () { bloque.classList.add('listo'); actualizar(); });
+      libro.on('init', function () {
+        // La librería pinta el lienzo de blanco; lo pintamos del color de fondo de la web
+        var fondo = getComputedStyle(document.body).getPropertyValue('--bg').trim() || '#f5f5f5';
+        var render = libro.getRender();
+        render.clear = function () {
+          this.ctx.fillStyle = fondo;
+          this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        };
+        bloque.classList.add('listo');
+        actualizar();
+      });
       libro.on('flip', actualizar);
       libro.on('changeOrientation', actualizar);
       libro.loadFromImages(paginas);

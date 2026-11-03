@@ -1,7 +1,7 @@
 /* Visor de flipbook — usa los colores y la tipografía de cada web */
 .flipbook {
   --flipbook-ratio: 1.414;
-  margin: 0 0 3rem;
+  margin: 3rem 0;
   outline: none;
 }
 .flipbook-escenario {

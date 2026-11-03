@@ -62,11 +62,20 @@ parchear(web / '_data/galeria.js', [
      "flipbook: paginasFlipbook"),
 ])
 
-# 2. proyecto.njk: el visor va entre el texto y las fotos
+# 2. proyecto.njk: el visor va al final, después de las fotos
 bloque = BLOQUE
-parchear(web / 'proyecto.njk', [
-    ('<div class="fotos-proyecto">', bloque + '\n<div class="fotos-proyecto">', 'class="flipbook"'),
-])
+njk = web / 'proyecto.njk'
+texto = njk.read_text(encoding='utf-8')
+ini = texto.find('{% if proyecto.flipbook')
+if ini >= 0:                                  # quita el bloque de donde esté
+    fin = texto.index('{% endif %}', texto.index('/flipbook/flipbook.js', ini)) + len('{% endif %}')
+    texto = texto[:ini].rstrip('\n') + '\n\n' + texto[fin:].lstrip('\n')
+ancla = texto.rindex('<a href="/" class="volver">')   # el último «volver», al pie
+nuevo = texto[:ancla] + bloque.rstrip('\n') + '\n\n' + texto[ancla:]
+if nuevo != njk.read_text(encoding='utf-8'):
+    njk.write_text(nuevo, encoding='utf-8'); print('modificado: proyecto.njk')
+else:
+    print('sin cambios: proyecto.njk')
 
 # 3. .eleventy.js: copiar la carpeta flipbook/ a la web publicada
 parchear(web / '.eleventy.js', [

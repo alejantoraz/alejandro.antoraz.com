@@ -17,20 +17,6 @@ pagina: proyectos
   <a href="/" class="volver">&larr; volver a proyectos</a>
 </div>
 
-{% if proyecto.flipbook and proyecto.flipbook.length %}
-<link rel="stylesheet" href="/flipbook/flipbook.css">
-<section class="flipbook" tabindex="0" aria-label="{{ proyecto.titulo or proyecto.nombre }}: documento">
-  <script type="application/json">{{ proyecto.flipbook | dump | safe }}</script>
-  <div class="flipbook-escenario"><div class="flipbook-libro"></div></div>
-  <div class="flipbook-controles">
-    <button type="button" class="flipbook-ant" aria-label="Página anterior">&lsaquo;</button>
-    <span class="flipbook-contador">1 / {{ proyecto.flipbook.length }}</span>
-    <button type="button" class="flipbook-sig" aria-label="Página siguiente">&rsaquo;</button>
-  </div>
-</section>
-<script src="/flipbook/flipbook.js" defer></script>
-{% endif %}
-
 <div class="fotos-proyecto">
   {% for imagen in proyecto.imagenes %}
     {% set indicePrevio = loop.length if loop.first else loop.index - 1 %}
@@ -49,5 +35,19 @@ pagina: proyectos
     </div>
   {% endfor %}
 </div>
+
+{% if proyecto.flipbook and proyecto.flipbook.length %}
+<link rel="stylesheet" href="/flipbook/flipbook.css">
+<section class="flipbook" tabindex="0" aria-label="{{ proyecto.titulo or proyecto.nombre }}: documento">
+  <script type="application/json">{{ proyecto.flipbook | dump | safe }}</script>
+  <div class="flipbook-escenario"><div class="flipbook-libro"></div></div>
+  <div class="flipbook-controles">
+    <button type="button" class="flipbook-ant" aria-label="Página anterior">&lsaquo;</button>
+    <span class="flipbook-contador">1 / {{ proyecto.flipbook.length }}</span>
+    <button type="button" class="flipbook-sig" aria-label="Página siguiente">&rsaquo;</button>
+  </div>
+</section>
+<script src="/flipbook/flipbook.js" defer></script>
+{% endif %}
 
 <a href="/" class="volver">&larr; volver a proyectos</a>
